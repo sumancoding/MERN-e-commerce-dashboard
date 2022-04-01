@@ -13,8 +13,18 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const collectData = () => {
+
+  const collectData = async () => {
     console.log(name, password, email);
+    let result = await fetch("http://localhost:5000/signup", {
+      method: "post",
+      body: JSON.stringify({ name, password, email }), //API doesnt take raw object so JSON.stringify is used
+      header: {
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    console.log(result);
   };
   return (
     <div>
