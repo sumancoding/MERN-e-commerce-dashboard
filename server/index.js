@@ -9,9 +9,9 @@ app.use(express.json());
 app.use(cors());
 
 app.post("/signup", async (req, res) => {
-  let user = new userModel(req.body);
-  let result = await user.save();
-  res.send(result);
+  // let user = new userModel(req.body);
+  // let result = await user.save();
+  res.send(req.body);
 });
 
 app.listen(5000);
