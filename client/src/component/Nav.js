@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => {
+  const auth = localStorage.getItem("user");
+
   return (
     <div>
       <ul className="nav-ul">
@@ -15,13 +17,14 @@ const Nav = () => {
           <NavLink to="/update">Update Product</NavLink>
         </li>
         <li>
-          <NavLink to="/logout">Logout</NavLink>
-        </li>
-        <li>
           <NavLink to="/profile">Profile</NavLink>
         </li>
         <li>
-          <NavLink to="/signup">SignUp</NavLink>
+          {auth ? (
+            <NavLink to="/logout">Logout</NavLink>
+          ) : (
+            <NavLink to="/signup">SignUp</NavLink>
+          )}
         </li>
       </ul>
     </div>

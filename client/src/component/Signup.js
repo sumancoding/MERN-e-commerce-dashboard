@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Container,
@@ -8,23 +8,37 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      navigate("/");
+    }
+  });
   const collectData = async () => {
     console.log(name, password, email);
     let result = await fetch("http://localhost:5000/signup", {
-      method: "post",
+      method: "Post",
       body: JSON.stringify({ name, password, email }), //API doesnt take raw object so JSON.stringify is used
-      header: {
+      headers: {
         "Content-Type": "application/json",
       },
     });
     result = await result.json();
-    console.log(result);
+    console.log(result); //it is in readable stream so again we need to use await
+
+    localStorage.setItem("user", JSON.stringify(result)); //setItam will store all the data into local storage , user is key
+    if (result) {
+      //when storing result into local storage it has to be converted to JSON
+      navigate("/");
+    }
   };
   return (
     <div>
