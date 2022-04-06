@@ -1,8 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const auth = localStorage.getItem("user");
+  const navigate = useNavigate();
+
+  function logout() {
+    localStorage.clear();
+    navigate("/signup");
+  }
 
   return (
     <div>
@@ -21,7 +27,9 @@ const Nav = () => {
         </li>
         <li>
           {auth ? (
-            <NavLink to="/logout">Logout</NavLink>
+            <NavLink onClick={logout} to="/signup">
+              Logout
+            </NavLink>
           ) : (
             <NavLink to="/signup">SignUp</NavLink>
           )}
