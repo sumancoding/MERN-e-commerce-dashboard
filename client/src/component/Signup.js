@@ -63,21 +63,21 @@ const Signup = () => {
                 />{" "}
                 <br /> <br />
                 <TextField
+                  label="Enter Your Email...."
+                  variant="outlined"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />{" "}
+                <br /> <br />
+                <TextField
                   type="password"
                   label="Enter Your Password...."
                   variant="outlined"
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
-                  }}
-                />{" "}
-                <br /> <br />
-                <TextField
-                  label="Enter Your Email...."
-                  variant="outlined"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
                   }}
                 />{" "}
                 <br /> <br />

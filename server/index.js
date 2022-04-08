@@ -11,14 +11,14 @@ app.post("/signup", async (req, res) => {
   let data = new userModel(req.body);
   let result = await data.save();
   result = result.toObject();
-  delete result.password;
+  delete result.password; //select cannot be used here because it's save, so use delete
   res.send(result);
 });
 
 app.post("/login", async (req, res) => {
   console.log(req.body);
   if (req.body.email && req.body.password) {
-    let user = await userModel.findOne(req.body).select("-password"); //this removes password
+    let user = await userModel.findOne(req.body).select("-password"); //this removes password, select can used in find
 
     if (user) {
       res.send(user);

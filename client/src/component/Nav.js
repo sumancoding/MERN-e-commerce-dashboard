@@ -31,8 +31,11 @@ const Nav = () => {
               Logout
             </NavLink>
           ) : (
-            <NavLink to="/signup">SignUp</NavLink>
+            <NavLink to="/signup">Sign Up</NavLink>
           )}
+        </li>
+        <li>
+          <NavLink to="/login">Log In</NavLink>
         </li>
       </ul>
     </div>

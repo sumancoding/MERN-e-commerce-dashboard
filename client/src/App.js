@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Footer from "./component/Footer";
 import Signup from "./component/Signup";
 import PrivateComponent from "./component/PrivateComponent";
+import Login from "./component/Login";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           />
         </Route>
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<h1>Page 404 Not found !!!</h1>} />
       </Routes>
       <Footer />
