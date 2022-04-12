@@ -15,6 +15,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    let auth = localStorage.setItem("user");
+    if (auth) {
+      navigate("/");
+    }
+  }, []);
+
   const handleLogin = async () => {
     //console.log(email, password);
     let result = await fetch("http://localhost:5000/login", {
