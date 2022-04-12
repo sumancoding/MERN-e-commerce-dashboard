@@ -25,7 +25,7 @@ const Nav = () => {
         <li>
           <NavLink to="/profile">Profile</NavLink>
         </li>
-        <li>
+        {/* <li>
           {auth ? (
             <NavLink onClick={logout} to="/signup">
               Logout
@@ -36,7 +36,26 @@ const Nav = () => {
         </li>
         <li>
           <NavLink to="/login">Log In</NavLink>
-        </li>
+        </li> */}
+        {auth ? (
+          <li>
+            {" "}
+            <NavLink onClick={logout} to="/signup">
+              Logout
+            </NavLink>
+          </li>
+        ) : (
+          <>
+            <li>
+              {" "}
+              <NavLink to="/signup">Sign Up</NavLink>
+            </li>
+            <li>
+              {" "}
+              <NavLink to="/login">Log In</NavLink>
+            </li>{" "}
+          </>
+        )}
       </ul>
     </div>
   );

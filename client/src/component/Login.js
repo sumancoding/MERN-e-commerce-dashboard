@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Container,
@@ -8,12 +8,30 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = () => {
-    console.log(email, password);
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    //console.log(email, password);
+    let result = await fetch("http://localhost:5000/login", {
+      method: "post",
+      body: JSON.stringify({ email, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json(); //data needs to be converted to json format
+    console.log(result);
+    if (result.email) {
+      localStorage.setItem("user", JSON.stringify(result)); //we cannot store JSON so we need to stringify
+      navigate("/");
+    } else {
+      alert("Something went wrong");
+    }
   };
   return (
     <div>
@@ -48,6 +66,7 @@ const Login = () => {
                 />{" "}
                 <br /> <br />
                 <Button
+                  type="button"
                   variant="contained"
                   sx={{ bgcolor: "purple", width: "40%" }}
                   onClick={handleLogin}

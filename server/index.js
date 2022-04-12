@@ -22,10 +22,10 @@ app.post("/login", async (req, res) => {
     if (user) {
       res.send(user);
     } else {
-      res.send("No result Found");
+      res.send({ result: "No result Found" });
     }
   } else {
-    res.send("No result Found");
+    res.send({ result: "No result Found" });
   }
 });
 
