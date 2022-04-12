@@ -15,19 +15,19 @@ app.post("/signup", async (req, res) => {
   res.send(result);
 });
 
-app.post("/login", async (req, res) => {
-  console.log(req.body);
-  if (req.body.email && req.body.password) {
-    let user = await userModel.findOne(req.body).select("-password"); //this removes password, select can used in find
+// app.post("/login", async (req, res) => {
+//   console.log(req.body);
+//   if (req.body.email && req.body.password) {
+//     let user = await userModel.findOne(req.body).select("-password"); //this removes password, select can used in find
 
-    if (user) {
-      res.send(user);
-    } else {
-      res.send("No result found");
-    }
-  } else {
-    console.log("Not found !!");
-  }
-});
+//     if (user) {
+//       res.send(user);
+//     } else {
+//       res.send("No result found");
+//     }
+//   } else {
+//     console.log("Not found !!");
+//   }
+// });
 
 app.listen(5000);
