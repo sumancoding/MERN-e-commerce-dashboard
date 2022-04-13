@@ -54,7 +54,7 @@ const Signup = () => {
               <CardContent>
                 <Typography variant="h4">Sign Up Page</Typography> <br />
                 <TextField
-                  label="Enter Your Name...."
+                  label="Enter Your Name..."
                   variant="outlined"
                   value={name}
                   onChange={(e) => {
@@ -63,7 +63,7 @@ const Signup = () => {
                 />{" "}
                 <br /> <br />
                 <TextField
-                  label="Enter Your Email...."
+                  label="Enter Your Email..."
                   variant="outlined"
                   value={email}
                   onChange={(e) => {
@@ -73,7 +73,7 @@ const Signup = () => {
                 <br /> <br />
                 <TextField
                   type="password"
-                  label="Enter Your Password...."
+                  label="Enter Your Password..."
                   variant="outlined"
                   value={password}
                   onChange={(e) => {
