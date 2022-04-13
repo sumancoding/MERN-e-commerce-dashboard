@@ -37,7 +37,7 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(result)); //we cannot store JSON so we need to stringify
       navigate("/");
     } else {
-      alert("Something went wrong");
+      alert("Not Registered Yet. Please Sign up first");
     }
   };
   return (
