@@ -37,8 +37,7 @@ const Signup = () => {
     localStorage.setItem("user", JSON.stringify(result)); //setItam will store all the data into local storage , user is key
     if (result) {
       //when storing result into local storage it has to be converted to JSON
-      //navigate("/");
-      navigate("/signup");
+      navigate("/");
     }
   };
   return (
