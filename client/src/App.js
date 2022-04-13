@@ -15,6 +15,7 @@ function App() {
           <Route path="/" element={<h1>Products Page</h1>} />
           <Route path="/add" element={<h1>Add the Products Page</h1>} />
           <Route path="/update" element={<h1>Update the Products Page</h1>} />
+          <Route path="/profile" element={<h1>Profile Page</h1>} />
           <Route
             path="/logout"
             element={<h1>Logut from the Products Page</h1>}
