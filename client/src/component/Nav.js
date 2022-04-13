@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import Logo from "./logo.png";
 
 const Nav = () => {
   const auth = localStorage.getItem("user");
@@ -12,6 +13,7 @@ const Nav = () => {
 
   return (
     <div>
+      <img src={Logo} alt="website-logo" className="logo" />
       {auth ? (
         <ul className="nav-ul">
           <li>
@@ -29,8 +31,9 @@ const Nav = () => {
           <li>
             {" "}
             <NavLink onClick={logout} to="/signup">
-              Logout
+              Logout ({JSON.parse(auth).name})
             </NavLink>
+            {/*  when we take it from localStorage its in string format so we need to convert it to json */}
           </li>{" "}
         </ul>
       ) : (

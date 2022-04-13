@@ -78,7 +78,7 @@ const Login = () => {
                   sx={{ bgcolor: "purple", width: "40%" }}
                   onClick={handleLogin}
                 >
-                  Sign Up
+                  Log In
                 </Button>
               </CardContent>
             </Card>
