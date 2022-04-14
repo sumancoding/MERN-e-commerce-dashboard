@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("./db/config");
 const userModel = require("./db/User");
+const productModel = require("./db/Product");
 const app = express();
 
 app.use(express.json());
@@ -27,6 +28,13 @@ app.post("/login", async (req, res) => {
   } else {
     res.send({ result: "No result Found" });
   }
+});
+
+app.post("/add-product", async (req, res) => {
+  //When we enter data in the database, it returns promise so we use async/await
+  const product = new productModel(req.body);
+  let result = await product.save();
+  res.send(result);
 });
 
 app.listen(5000);
