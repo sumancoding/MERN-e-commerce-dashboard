@@ -15,8 +15,19 @@ const AddProduct = () => {
   const [category, setCategory] = useState("");
   const [company, setCompany] = useState("");
 
-  const handleSubmit = () => {
-    console.log(name, price, category, company);
+  const handleSubmit = async () => {
+    //API reutrns async result, so we need to use async/await
+    // console.log(name, price, category, company);
+    const userId = JSON.parse(localStorage.getItem("user"))._id; //without JSOn.parse it gets into string
+    let result = await fetch("http://localhost:5000/add-product", {
+      method: "Post",
+      body: JSON.stringify({ name, price, category, company, userId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    console.log(result);
   };
 
   return (
