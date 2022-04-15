@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Container,
@@ -10,6 +10,15 @@ import {
 } from "@mui/material";
 
 const AddProduct = () => {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [company, setCompany] = useState("");
+
+  const handleSubmit = () => {
+    console.log(name, price, category, company);
+  };
+
   return (
     <div>
       <Grid
@@ -22,38 +31,51 @@ const AddProduct = () => {
           <Container maxWidth="sm">
             <Card sx={{ mt: 3 }}>
               <CardContent>
-                <Typography variant="h4">Log In Page</Typography> <br />
+                <Typography variant="h4">Add Product</Typography> <br />
                 <TextField
                   label="Enter Product Name ..."
                   variant="outlined"
                   sx={{ width: "50%" }}
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
                 />{" "}
                 <br /> <br />
                 <TextField
-                  type="password"
                   label="Enter Product Price ..."
                   variant="outlined"
                   sx={{ width: "50%" }}
+                  value={price}
+                  onChange={(e) => {
+                    setPrice(e.target.value);
+                  }}
                 />
                 <br /> <br />
                 <TextField
-                  type="password"
                   label="Enter Product Category ..."
                   variant="outlined"
                   sx={{ width: "50%" }}
+                  value={category}
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                  }}
                 />
                 <br /> <br />
                 <TextField
-                  type="password"
                   label="Enter Product Company ..."
                   variant="outlined"
                   sx={{ width: "50%" }}
+                  value={company}
+                  onChange={(e) => {
+                    setCompany(e.target.value);
+                  }}
                 />
                 <br /> <br />
                 <Button
-                  type="button"
                   variant="contained"
                   sx={{ bgcolor: "purple", width: "50%" }}
+                  onClick={handleSubmit}
                 >
                   Add Product
                 </Button>
