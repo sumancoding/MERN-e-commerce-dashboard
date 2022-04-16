@@ -20,7 +20,7 @@ const Products = () => {
     result = await result.json();
     setProducts(result);
   };
-  console.log(products);
+  //console.log(products);
   return (
     <div>
       <Container>
