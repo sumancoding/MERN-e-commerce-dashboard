@@ -16,13 +16,14 @@
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   text-align: center;
   width: 100%;
   background-color: purple;
   color: white;
 }
+
 .nav-right {
   text-align: right;
 }
