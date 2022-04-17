@@ -7,7 +7,9 @@ import {
   Container,
   Box,
   Button,
+  Stack,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -59,13 +61,30 @@ const Products = () => {
                     {" "}
                     Product company: {item.company}
                   </Typography>
-                  <Button
-                    variant="contained"
-                    sx={{ bgcolor: "purple", width: "40%" }}
-                    onClick={() => handleDelete(item._id)}
-                  >
-                    Delete
-                  </Button>
+                  <Stack spacing={2} direction="row">
+                    <Button
+                      variant="contained"
+                      sx={{ bgcolor: "purple", width: "40%" }}
+                      onClick={() => handleDelete(item._id)}
+                    >
+                      Delete
+                    </Button>{" "}
+                    <Link
+                      to={`/update/${item._id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      {" "}
+                      <Button
+                        variant="contained"
+                        sx={{
+                          bgcolor: "purple",
+                          width: "110%",
+                        }}
+                      >
+                        Update
+                      </Button>
+                    </Link>
+                  </Stack>
                 </CardContent>
               </Card>
             </Grid>

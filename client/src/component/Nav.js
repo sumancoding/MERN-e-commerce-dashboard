@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./logo.png";
 
 const Nav = () => {
@@ -17,22 +17,22 @@ const Nav = () => {
       {auth ? (
         <ul className="nav-ul">
           <li>
-            <NavLink to="/">Products</NavLink>
+            <Link to="/">Products</Link>
           </li>{" "}
           <li>
-            <NavLink to="/add">Add Product</NavLink>
+            <Link to="/add">Add Product</Link>
           </li>
           <li>
-            <NavLink to="/update">Update Product</NavLink>
+            <Link to="/update">Update Product</Link>
           </li>
           <li>
-            <NavLink to="/profile">Profile</NavLink>
+            <Link to="/profile">Profile</Link>
           </li>
           <li>
             {" "}
-            <NavLink onClick={logout} to="/signup">
+            <Link onClick={logout} to="/signup">
               Logout ({JSON.parse(auth).name})
-            </NavLink>
+            </Link>
             {/*  when we take it from localStorage its in string format so we need to convert it to json */}
           </li>{" "}
         </ul>
@@ -41,11 +41,11 @@ const Nav = () => {
           {" "}
           <li>
             {" "}
-            <NavLink to="/signup">Sign Up</NavLink>
+            <Link to="/signup">Sign Up</Link>
           </li>
           <li>
             {" "}
-            <NavLink to="/login">Log In</NavLink>
+            <Link to="/login">Log In</Link>
           </li>
         </ul>
       )}

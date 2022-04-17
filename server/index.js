@@ -51,4 +51,7 @@ app.delete("/product/:id", async (req, res) => {
   res.send(result);
 });
 
+//app.put('/update', (req,res) =>
+//})
+
 app.listen(5000);
