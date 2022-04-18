@@ -51,7 +51,13 @@ app.delete("/product/:id", async (req, res) => {
   res.send(result);
 });
 
-//app.put('/update', (req,res) =>
-//})
+app.get("/product/:id", async (req, res) => {
+  let result = await productModel.findOne({ _id: req.params.id });
+  if (result) {
+    res.send(result);
+  } else {
+    res.send({ result: "not Found" });
+  }
+});
 
 app.listen(5000);
