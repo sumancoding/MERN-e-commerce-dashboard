@@ -5,6 +5,9 @@ const userModel = require("./db/User");
 const productModel = require("./db/Product");
 const app = express();
 
+const Jwt = require("jsonwebtoken");
+const jwtKey = "e-comm";
+
 app.use(express.json());
 app.use(cors()); //write it as a function
 
@@ -21,7 +24,12 @@ app.post("/login", async (req, res) => {
   if (req.body.email && req.body.password) {
     let user = await userModel.findOne(req.body).select("-password"); //this removes password, select can be used in find
     if (user) {
-      res.send(user);
+      Jwt.sign({ user }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+        if (err) {
+          res.send({ result: "Something went wrong. Try after wards" });
+        }
+        res.send({ user, auth: token });
+      });
     } else {
       res.send({ result: "No result Found" });
     }
