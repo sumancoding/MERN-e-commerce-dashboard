@@ -20,7 +20,11 @@ const Products = () => {
   }, []); //called only once when it loads so empty []
 
   const getProducts = async () => {
-    let result = await fetch("http://localhost:5000/products"); //Since, its get method we dont need to define method, body, headers and so on
+    let result = await fetch("http://localhost:5000/products", {
+      headers: {
+        authorization: JSON.parse(localStorage.getItem("token")),
+      },
+    }); //Since, its get method we dont need to define method, body, headers and so on
     result = await result.json(); //still in readstream so we need to convert it to JSON format
 
     setProducts(result);

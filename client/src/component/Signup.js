@@ -34,7 +34,8 @@ const Signup = () => {
     result = await result.json();
     console.log(result); //it is in readable stream so again we need to use await
 
-    localStorage.setItem("user", JSON.stringify(result)); //setItam will store all the data into local storage , user is key
+    localStorage.setItem("user", JSON.stringify(result.result)); //setItam will store all the data into local storage , user is key
+    localStorage.setItem("token", JSON.stringify(result.auth));
     if (result) {
       //when storing result into local storage it has to be converted to JSON
       navigate("/");

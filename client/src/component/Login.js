@@ -33,8 +33,9 @@ const Login = () => {
     });
     result = await result.json(); //data needs to be converted to json format
     console.log(result);
-    if (result.email) {
-      localStorage.setItem("user", JSON.stringify(result)); //we cannot store JSON so we need to stringify
+    if (result.auth) {
+      localStorage.setItem("user", JSON.stringify(result.user)); //we cannot store JSON so we need to stringify
+      localStorage.setItem("token", JSON.stringify(result.auth));
       navigate("/");
     } else {
       alert("Not Registered Yet. Please Sign up first");
