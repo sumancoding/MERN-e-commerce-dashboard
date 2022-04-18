@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Container,
@@ -8,13 +8,28 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"; //we use useParams to get id from url
 
 const Update = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [company, setCompany] = useState("");
+  const params = useParams();
+
+  useEffect(() => {
+    getProductDetails();
+  }, []);
+
+  const getProductDetails = async () => {
+    let result = await fetch(`http://localhost:5000/product/${params.id}`);
+    result = await result.json();
+    //console.log(result);
+    setName(result.name);
+    setPrice(result.price);
+    setCategory(result.price);
+    setCompany(result.company);
+  };
 
   const navigate = useNavigate();
 
