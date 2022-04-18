@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Stack,
+  TextField,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -34,61 +35,86 @@ const Products = () => {
       getProducts();
     }
   };
+
+  const handleSearch = async (e) => {
+    //console.log(e.target.value);
+    let key = e.target.value;
+    if (key) {
+      let result = await fetch(`http://localhost:5000/search/${key}`);
+      result = await result.json();
+      if (result) {
+        setProducts(result);
+      }
+    } else {
+      getProducts();
+    }
+  };
+
   return (
     <div className="product-lists">
       <Container>
         <Typography variant="h4" sx={{ mt: 4, textAlign: "center" }}>
           Product Lists
         </Typography>
+        <TextField
+          label="Search Product"
+          variant="outlined"
+          style={{ width: "30%" }}
+          onChange={handleSearch}
+        />
         <Grid container spacing={3} sx={{ mt: 1 }}>
-          {products.map((item, id) => (
-            <Grid item xl={3} lg={4} sm={6} xs={12} key={item._id}>
-              <Card variant="outlined" sx={{ color: "Navy" }}>
-                <CardContent>
-                  <Typography variant="subtitle1" sx={{ p: 1 }}>
-                    <Box sx={{ fontWeight: "bold" }}>
-                      Product Name: {item.name}
-                    </Box>
-                  </Typography>
-                  <Typography variant="subtitle1" sx={{ p: 1 }}>
-                    Product Price:{item.price}
-                  </Typography>
-                  <Typography variant="subtitle1" sx={{ p: 1 }}>
-                    {" "}
-                    Product category: {item.category}
-                  </Typography>
-                  <Typography variant="subtitle1" sx={{ p: 1 }}>
-                    {" "}
-                    Product company: {item.company}
-                  </Typography>
-                  <Stack spacing={2} direction="row">
-                    <Button
-                      variant="contained"
-                      sx={{ bgcolor: "purple", width: "40%" }}
-                      onClick={() => handleDelete(item._id)}
-                    >
-                      Delete
-                    </Button>{" "}
-                    <Link
-                      to={`/update/${item._id}`}
-                      style={{ textDecoration: "none" }}
-                    >
+          {products.length > 0 ? (
+            products.map((item, id) => (
+              <Grid item xl={3} lg={4} sm={6} xs={12} key={item._id}>
+                <Card variant="outlined" sx={{ color: "Navy" }}>
+                  <CardContent>
+                    <Typography variant="subtitle1" sx={{ p: 1 }}>
+                      <Box sx={{ fontWeight: "bold" }}>
+                        Product Name: {item.name}
+                      </Box>
+                    </Typography>
+                    <Typography variant="subtitle1" sx={{ p: 1 }}>
+                      Product Price:{item.price}
+                    </Typography>
+                    <Typography variant="subtitle1" sx={{ p: 1 }}>
                       {" "}
+                      Product category: {item.category}
+                    </Typography>
+                    <Typography variant="subtitle1" sx={{ p: 1 }}>
+                      {" "}
+                      Product company: {item.company}
+                    </Typography>
+                    <Stack spacing={2} direction="row">
                       <Button
                         variant="contained"
-                        sx={{
-                          bgcolor: "purple",
-                          width: "110%",
-                        }}
+                        sx={{ bgcolor: "purple", width: "40%" }}
+                        onClick={() => handleDelete(item._id)}
                       >
-                        Update
-                      </Button>
-                    </Link>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+                        Delete
+                      </Button>{" "}
+                      <Link
+                        to={`/update/${item._id}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        {" "}
+                        <Button
+                          variant="contained"
+                          sx={{
+                            bgcolor: "purple",
+                            width: "110%",
+                          }}
+                        >
+                          Update
+                        </Button>
+                      </Link>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))
+          ) : (
+            <h1>No Result Found !!</h1>
+          )}
         </Grid>
       </Container>
     </div>
