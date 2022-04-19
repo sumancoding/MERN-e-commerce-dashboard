@@ -6,7 +6,7 @@ const productModel = require("./db/Product");
 const app = express();
 
 const Jwt = require("jsonwebtoken");
-const jwtKey = "e-comm";
+const jwtKey = "e-comm"; //token is created based on key and key must be secret
 
 app.use(express.json());
 app.use(cors()); //write it as a function
@@ -16,7 +16,12 @@ app.post("/signup", async (req, res) => {
   let result = await data.save();
   result = result.toObject(); //pre-defined function that converts to Object
   delete result.password; //select cannot be used here because it's save, so use delete
-  res.send(result);
+  Jwt.sign({ result }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+    if (err) {
+      res.send({ result: "Something went wrong. Try after wards" });
+    }
+    res.send({ result, auth: token });
+  });
 });
 
 app.post("/login", async (req, res) => {
@@ -24,7 +29,9 @@ app.post("/login", async (req, res) => {
   if (req.body.email && req.body.password) {
     let user = await userModel.findOne(req.body).select("-password"); //this removes password, select can be used in find
     if (user) {
+      //expiry time is optional
       Jwt.sign({ user }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+        //sign is like a function, has 2 parameter, 2nd is a call back function
         if (err) {
           res.send({ result: "Something went wrong. Try after wards" });
         }
