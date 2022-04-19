@@ -45,14 +45,14 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/add-product", async (req, res) => {
+app.post("/add-product", verifytoken, async (req, res) => {
   //When we enter data in the database, it returns promise so we use async/await
   const product = new productModel(req.body);
   let result = await product.save();
   res.send(result);
 });
 
-app.get("/products", async (req, res) => {
+app.get("/products", verifytoken, async (req, res) => {
   let products = await productModel.find();
   if (products.length > 0) {
     res.send(products);
@@ -61,12 +61,12 @@ app.get("/products", async (req, res) => {
   }
 });
 
-app.delete("/product/:id", async (req, res) => {
+app.delete("/product/:id", verifytoken, async (req, res) => {
   const result = await productModel.deleteOne({ _id: req.params.id });
   res.send(result);
 });
 
-app.get("/product/:id", async (req, res) => {
+app.get("/product/:id", verifytoken, async (req, res) => {
   let result = await productModel.findOne({ _id: req.params.id });
   if (result) {
     res.send(result);
@@ -75,7 +75,7 @@ app.get("/product/:id", async (req, res) => {
   }
 });
 
-app.put("/product/:id", async (req, res) => {
+app.put("/product/:id", verifytoken, async (req, res) => {
   let result = await productModel.updateOne(
     { _id: req.params.id },
     { $set: req.body }
@@ -83,7 +83,7 @@ app.put("/product/:id", async (req, res) => {
   res.send(result);
 });
 
-app.get("/search/:key", async (req, res) => {
+app.get("/search/:key", verifytoken, async (req, res) => {
   let result = await productModel.find({
     $or: [
       { name: { $regex: req.params.key } },
@@ -93,5 +93,23 @@ app.get("/search/:key", async (req, res) => {
   });
   res.send(result);
 });
+
+//creating a middleware first  //next will take verifyToken to selected API
+function verifytoken(req, res, next) {
+  let token = req.headers["authorization"];
+  if (token) {
+    token = token.split(" ")[1];
+    Jwt.verify(token, jwtKey, (err, sucess) => {
+      if (err) {
+        res.status(401).send("Valid Token Required");
+      } else {
+        next();
+      }
+    });
+  } else {
+    res.status(403).send("Please add token with header");
+  }
+  //console.log("Middleware called", token);
+}
 
 app.listen(5000);
